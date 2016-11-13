@@ -38,21 +38,26 @@ router.post('/todo', function(req, res) {
 });
 
 router.put('/todo/:id', function(req,res) {
-  var condition = 'id = ' + req.params.id;
 
-  console.log('condition', condition);
-
-  todo.update({completed: req.body.completed }, condition, function () {
+  models.Todo.findOne({ where: {id: req.params.id} })
+    .then( function(todo) {
+      if(todo) {
+        todo.update({
+          completed: req.body.completed
+        })
+      }
+    })
     res.redirect('/todo');
-  });
 });
 
 router.delete('/todo/:id', function (req, res) {
-  var condition = 'id = ' + req.params.id;
-
-  todo.delete(condition, function() {
-    res.redirect('/todo');
+  models.Todo.findOne({ where: {id: req.params.id} })
+    .then( function(todo) {
+      if(todo) {
+        todo.destroy();
+      }
+      res.redirect('/todo');
+    });
   });
-});
 
 module.exports = router;
