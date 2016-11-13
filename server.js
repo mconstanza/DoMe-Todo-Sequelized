@@ -9,13 +9,27 @@ var app = express();
 // public director for static content
 app.use(express.static(process.cwd() + '/public'));
 
-// set up body parser to handle url parsing
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+// bodyParser middleware
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({extended: true}));
 
 // override with POST having ?_method=DELETE
 app.use(methodOR('_method'));
+
+// bring in our models folder. This brings in the model's object, as defined in index.js
+var models  = require('./models');
+
+// extract our sequelize connection from the models object, to avoid confusion
+var sequelizeConnection = models.sequelize
+/////////////////////////////////////////////////////////////////////////////////////////////
+// We run this query so that we can drop our tables even though they have foreign keys
+sequelizeConnection.query('SET FOREIGN_KEY_CHECKS = 0')
+
+// a) sync the tables
+.then(function(){
+	return sequelizeConnection.sync({force:true})
+})
+/////////////////////////////////////////////////////////////////////////////////////////
 
 // handlebars for templating
 var hb = require('express-handlebars');

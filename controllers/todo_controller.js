@@ -2,6 +2,7 @@
 
 var express = require('express');
 var todo = require('../models/todo.js');
+var models  = require('../models');
 
 // create the express router
 var router = express.Router();
@@ -11,17 +12,29 @@ router.get('/', function(req, res) {
 });
 
 router.get('/todo', function (req, res) {
-  todo.all(function (data) {
-    var hbsObj = { todos: data };
-    console.log(hbsObj);
-    res.render('index', hbsObj);
-  });
+  // todo.all(function (data) {
+  //   var hbsObj = { todos: data };
+  //   console.log(hbsObj);
+  //   res.render('index', hbsObj);
+  models.Todo.findAll()
+    .then(function(todos){
+      console.log(todos);
+      var hbsObj = { todos: todos };
+      console.log(hbsObj);
+      res.render('index', hbsObj);
+    });
 });
 
 router.post('/todo', function(req, res) {
-  todo.create(['item', 'completed'], [req.body.item, req.body.completed], function(){
-    res.redirect('/todo');
-  });
+  // todo.create(['item', 'completed'], [req.body.item, req.body.completed], function(){
+  //   res.redirect('/todo');
+  models.Todo.create(
+    {
+      item: req.body.item,
+      completed: req.body.completed
+    }
+  )
+  res.redirect('/todo');
 });
 
 router.put('/todo/:id', function(req,res) {

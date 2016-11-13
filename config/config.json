@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "Batman626",
+    "database": "todoSequelized",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "todoSequelized",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "pvx4n2s92seimsif",
+    "password": "j0wdjiz75npkt8az",
+    "database": "todoSequelized",
+    "host": "enqhzd10cxh7hv2e.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "dialect": "mysql"
+  }
+}

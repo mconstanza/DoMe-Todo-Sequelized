@@ -1,27 +1,15 @@
-var orm = require('../config/orm.js');
+'use strict';
 
-var todo = {
-  all: function(cb) {
-    orm.all('todo', function (res) {
-      cb(res);
-    });
-  },
-  create: function (cols, vals, cb) {
-    orm.create('todo', cols, vals, function (res) {
-      cb(res);
-    });
-  },
-  update: function (objColVals, condition, cb) {
-    orm.update('todo', objColVals, condition, function (res) {
-      cb(res);
-    });
-  },
-  delete: function (condition, cb) {
-    orm.delete('todo', condition, function (res) {
-      cb(res);
-    });
-  }
+module.exports = function(sequelize, DataTypes) {
+  var Todo = sequelize.define('Todo', {
+    item: DataTypes.TEXT,
+    completed: DataTypes.BOOLEAN
+  }, {
+    classMethods: {
+      associate: function(models) {
+
+      }
+    }
+  });
+  return Todo;
 };
-
-
-module.exports = todo;
