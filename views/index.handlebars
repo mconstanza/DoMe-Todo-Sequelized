@@ -1,0 +1,95 @@
+<div class='container'>
+
+  <div class="jumbotron text-center">
+    <h1>Do Me!</h1>
+    <br>
+      <form class="create-update-form" action="todo" method="POST">
+
+        <div class="form-group">
+          <input type="text" id="todo" name="item">
+        </div>
+
+        <div class="form-group">
+          <input type="hidden" name="completed" value="0" checked>
+          <!-- <input type="radio" name="completed" value="1"> Done -->
+        </div>
+        <button class='btn btn-primary' type="submit">Add Stuff to Do</button>
+      </form>
+    </div> <!--row-->
+
+    <hr>
+
+  <div class='row text-center'>
+    <div class='col-md-6'>
+      <h2>Stuff that isn't done</h2>
+      <hr>
+
+      <ul id='todo-not-completed'>
+        {{#each todos}}
+          {{#unless this.completed}}
+          <div class='row text-left'>
+            <div class='col-md-8'>
+            <li class='todo' id='{{this.id}}'>
+              <h4>
+                {{this.item}}
+              </h4>
+            </div>
+
+            <div class='col-md-2'>
+              <form id='{{this.id}}' action="todo/{{this.id}}?_method=PUT" method="POST">
+                <input type="hidden" name="completed" value="true">
+              <button class='btn btn-default done-button' type="submit">Done!</button>
+              </form>
+            </div>
+
+
+            <div class='col-md-2'>
+              {{> todo/delete-todo}}
+            </div>
+            </li>
+          </div>
+
+            <hr>
+
+          {{/unless}}
+        {{/each}}
+      </ul>
+    </div>
+
+    <div class='col-md-6'>
+      <h2>Stuff I did</h2>
+      <hr>
+
+      <ul>
+        {{#each todos}}
+          {{#if this.completed}}
+          <div class='row text-left'>
+            <div class='col-md-8'>
+            <li class'li-right'>
+              <h4>
+                <strike>{{this.item}}</strike>
+              </h4>
+            </div>
+
+
+            <div class='col-md-2'>
+              <form action="todo/{{this.id}}?_method=PUT" method="POST">
+                <input type="hidden" name="completed" value="false">
+                <button class='btn btn-default again-button' type="submit">Repeat</button>
+              </form>
+            </div>
+
+            <div class='col-md-2'>
+              {{> todo/delete-todo}}
+            </li>
+            </div>
+          </div>
+
+            <hr>
+
+          {{/if}}
+        {{/each}}
+      </ul>
+    </div> <!--col 6 -->
+  </div> <!--row -->
+</div>

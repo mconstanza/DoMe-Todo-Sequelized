@@ -1,0 +1,38 @@
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.btn {
+  display: inline-block;
+  text-align: center;
+}
+
+.jumbotron {
+  background-color: transparent;
+  font-family: 'Indie Flower', cursive;
+
+}
+
+.jumbotron h1{
+  font-family: 'Indie Flower', cursive;
+
+}
+
+h2 {
+  font-family: 'Indie Flower', cursive;
+
+}
+
+ul {
+  font-family: 'Indie Flower', cursive;
+
+}
+
+.li-right {
+  float:left;
+}
+
+.done-button, .again-button, .delete-button {
+  width: 100%;
+}
