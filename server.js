@@ -40,9 +40,6 @@ app.set('view engine', 'handlebars');
 var routes = require('./controllers/todo_controller.js');
 app.use('/', routes);
 
-var users = require('./controllers/user_controoler.js');
-app.use('/users', users);
-
 // Server Ready ////////////////////////////////////////////////////////////
 var port = process.env.PORT || 3000;
 app.listen(port);
