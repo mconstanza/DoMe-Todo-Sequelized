@@ -12,10 +12,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/todo', function (req, res) {
-  // todo.all(function (data) {
-  //   var hbsObj = { todos: data };
-  //   console.log(hbsObj);
-  //   res.render('index', hbsObj);
+
   models.Todo.findAll()
     .then(function(todos){
       console.log(todos);
