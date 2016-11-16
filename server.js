@@ -9,17 +9,6 @@ var app = express();
 // public director for static content
 app.use(express.static(process.cwd() + '/public'));
 
-// Express Session
-app.use(session({
-	secret: 'secret',
-	saveUninitialized: true,
-	resave: true
-}));
-
-// Passport Init
-app.use(passport.initialize());
-app.use(passport.session());
-
 // bodyParser middleware
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({extended: true}));
